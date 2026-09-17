@@ -1,0 +1,3233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ôn tập Chủ đề 1 - Các phép đo - KHTN 6</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:
+        Arial,
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8f7ff 0%,
+            #ffffff 50%,
+            #eefbf4 100%
+        );
+
+    color:#17365d;
+}
+
+
+/* =========================
+   APP
+========================= */
+
+.app{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+    min-height:90px;
+
+    padding:15px 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #087fce,
+            #1769aa
+        );
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.15);
+
+}
+
+
+.title-area h1{
+
+    margin:0;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    letter-spacing:.3px;
+}
+
+
+.title-area p{
+
+    margin:5px 0 0;
+
+    font-size:16px;
+
+    opacity:.95;
+}
+
+
+.progress-area{
+
+    width:270px;
+}
+
+
+.progress-text{
+
+    text-align:right;
+
+    margin-bottom:6px;
+
+    font-weight:bold;
+}
+
+
+.progress{
+
+    width:100%;
+
+    height:12px;
+
+    background:
+        rgba(255,255,255,.3);
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+
+.progress-bar{
+
+    height:100%;
+
+    width:5%;
+
+    background:#ffd43b;
+
+    border-radius:20px;
+
+    transition:.4s;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+
+    width:100%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:20px;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        330px;
+
+    gap:20px;
+
+    flex:1;
+}
+
+
+/* =========================
+   QUESTION CARD
+========================= */
+
+.question-panel{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:27px;
+
+    box-shadow:
+        0 7px 25px rgba(0,0,0,.09);
+
+    min-height:650px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+.question-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #087fce,
+            #21a957,
+            #ffb703,
+            #e53935
+        );
+}
+
+
+.question-number{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    background:#eaf6ff;
+
+    color:#087fce;
+
+    font-weight:900;
+
+    font-size:17px;
+
+    margin-bottom:15px;
+}
+
+
+.question-type{
+
+    display:inline-block;
+
+    margin-left:8px;
+
+    padding:7px 14px;
+
+    border-radius:20px;
+
+    background:#fff3cd;
+
+    color:#946200;
+
+    font-size:14px;
+
+    font-weight:bold;
+}
+
+
+.question{
+
+    font-size:26px;
+
+    line-height:1.45;
+
+    font-weight:800;
+
+    margin:
+        10px 0
+        25px;
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.answers{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+}
+
+
+.answer{
+
+    border:3px solid #dceaf5;
+
+    background:#f9fcff;
+
+    border-radius:16px;
+
+    padding:16px 18px;
+
+    font-size:19px;
+
+    font-weight:650;
+
+    color:#17365d;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:
+        .18s ease;
+
+}
+
+
+.answer:hover{
+
+    transform:
+        translateY(-3px);
+
+    border-color:#168ee5;
+
+    box-shadow:
+        0 5px 15px
+        rgba(8,127,206,.12);
+}
+
+
+.answer.correct{
+
+    background:#dff8e7;
+
+    border-color:#20a957;
+
+    color:#087a36;
+
+    animation:
+        correctPop .35s ease;
+}
+
+
+.answer.wrong{
+
+    background:#ffe2e2;
+
+    border-color:#e53935;
+
+    color:#b71c1c;
+
+    animation:
+        wrongShake .35s ease;
+}
+
+
+.answer-label{
+
+    display:inline-flex;
+
+    width:35px;
+    height:35px;
+
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:#e3edf5;
+
+    margin-right:9px;
+
+    font-weight:900;
+}
+
+
+.correct .answer-label{
+
+    background:#21a957;
+
+    color:white;
+}
+
+
+.wrong .answer-label{
+
+    background:#e53935;
+
+    color:white;
+}
+
+
+@keyframes correctPop{
+
+    0%{
+        transform:scale(.96);
+    }
+
+    60%{
+        transform:scale(1.03);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+
+@keyframes wrongShake{
+
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-5px);
+    }
+
+    75%{
+        transform:translateX(5px);
+    }
+
+}
+
+
+/* =========================
+   TRUE / FALSE
+========================= */
+
+.tf-container{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:18px;
+
+    margin-top:15px;
+}
+
+
+.tf-button{
+
+    border:none;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+
+.tf-true{
+
+    background:#e2f8e9;
+
+    color:#168542;
+
+    border:3px solid #35b96b;
+}
+
+
+.tf-false{
+
+    background:#ffe5e5;
+
+    color:#c62828;
+
+    border:3px solid #ef5350;
+}
+
+
+.tf-button:hover{
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* =========================
+   SHORT ANSWER
+========================= */
+
+.short-answer{
+
+    margin-top:20px;
+}
+
+
+.short-answer input{
+
+    width:100%;
+
+    padding:17px;
+
+    border-radius:14px;
+
+    border:3px solid #d9e7f3;
+
+    font-size:20px;
+
+    outline:none;
+}
+
+
+.short-answer input:focus{
+
+    border-color:#168ee5;
+
+}
+
+
+.check-short{
+
+    margin-top:12px;
+
+    padding:13px 24px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#087fce;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   FEEDBACK
+========================= */
+
+.feedback{
+
+    margin-top:20px;
+
+    padding:17px 20px;
+
+    border-radius:15px;
+
+    font-size:18px;
+
+    line-height:1.45;
+
+    font-weight:700;
+
+    display:none;
+}
+
+
+.feedback.correct-feedback{
+
+    display:block;
+
+    background:#e5f9eb;
+
+    border-left:
+        6px solid #21a957;
+
+    color:#126b34;
+}
+
+
+.feedback.wrong-feedback{
+
+    display:block;
+
+    background:#fff0f0;
+
+    border-left:
+        6px solid #e53935;
+
+    color:#a51d1d;
+}
+
+
+/* =========================
+   SHOW ANSWER
+========================= */
+
+.show-answer{
+
+    margin-top:17px;
+}
+
+
+.show-btn{
+
+    border:none;
+
+    background:#ffb703;
+
+    color:#553500;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+}
+
+
+.show-btn:hover{
+
+    background:#ffa000;
+
+}
+
+
+.explanation{
+
+    display:none;
+
+    margin-top:12px;
+
+    padding:16px;
+
+    border-radius:13px;
+
+    background:#fff9dc;
+
+    border:
+        2px solid #ffd43b;
+
+    line-height:1.5;
+
+    font-size:17px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navigation{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:25px;
+
+}
+
+
+.nav-btn{
+
+    border:none;
+
+    padding:13px 23px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+}
+
+
+.prev{
+
+    background:#e7eef5;
+
+    color:#35526c;
+}
+
+
+.next{
+
+    background:#087fce;
+
+    color:white;
+}
+
+
+.nav-btn:hover{
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:20px;
+
+    height:fit-content;
+
+    box-shadow:
+        0 7px 25px rgba(0,0,0,.09);
+
+    position:sticky;
+
+    top:15px;
+}
+
+
+.sidebar-title{
+
+    text-align:center;
+
+    font-size:20px;
+
+    font-weight:900;
+
+    color:#087fce;
+
+    margin-bottom:15px;
+}
+
+
+.question-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:8px;
+}
+
+
+.question-btn{
+
+    aspect-ratio:1;
+
+    border:
+        2px solid #d8e7f2;
+
+    background:#f7fbff;
+
+    color:#31516e;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+
+.question-btn:hover{
+
+    border-color:#087fce;
+
+    transform:
+        scale(1.04);
+}
+
+
+.question-btn.active{
+
+    background:#087fce;
+
+    color:white;
+
+    border-color:#087fce;
+}
+
+
+.question-btn.correct-state{
+
+    background:#21a957;
+
+    color:white;
+
+    border-color:#21a957;
+}
+
+
+.question-btn.wrong-state{
+
+    background:#e53935;
+
+    color:white;
+
+    border-color:#e53935;
+}
+
+
+/* =========================
+   SCORE
+========================= */
+
+.score-box{
+
+    margin-top:20px;
+
+    padding:15px;
+
+    background:#f4f9fc;
+
+    border-radius:15px;
+}
+
+
+.score-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:5px 0;
+
+    font-weight:750;
+}
+
+
+.correct-score{
+
+    color:#21a957;
+}
+
+
+.wrong-score{
+
+    color:#e53935;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.68);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:999;
+}
+
+
+.result-card{
+
+    width:min(620px,90%);
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 60px
+        rgba(0,0,0,.35);
+
+    animation:
+        resultPop .4s ease;
+}
+
+
+@keyframes resultPop{
+
+    from{
+        transform:scale(.75);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+
+.result-card h2{
+
+    margin-top:0;
+
+    color:#087fce;
+
+    font-size:31px;
+}
+
+
+.final-score{
+
+    font-size:62px;
+
+    font-weight:900;
+
+    color:#21a957;
+
+    margin:10px;
+}
+
+
+.result-info{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+    margin:20px 0;
+}
+
+
+.result-item{
+
+    padding:13px;
+
+    border-radius:12px;
+
+    background:#f3f8fc;
+}
+
+
+.result-item strong{
+
+    display:block;
+
+    font-size:25px;
+
+    margin-top:5px;
+}
+
+
+.restart{
+
+    border:none;
+
+    background:#087fce;
+
+    color:white;
+
+    padding:14px 30px;
+
+    border-radius:13px;
+
+    font-size:17px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:950px){
+
+    .main{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .sidebar{
+
+        position:static;
+
+    }
+
+}
+
+
+@media(max-width:650px){
+
+    .answers{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .question{
+
+        font-size:22px;
+
+    }
+
+    .header{
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .progress-area{
+
+        width:100%;
+
+    }
+
+    .tf-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .result-info{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="title-area">
+
+        <h1>
+            🧪 ÔN TẬP CHỦ ĐỀ 1 – CÁC PHÉP ĐO
+        </h1>
+
+        <p>
+            Khoa học tự nhiên 6 • 20 câu hỏi tương tác
+        </p>
+
+    </div>
+
+
+    <div class="progress-area">
+
+        <div
+            class="progress-text"
+            id="progressText"
+        >
+            Câu 1 / 20
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progressBar"
+            ></div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<section class="question-panel">
+
+
+    <div>
+
+        <span
+            class="question-number"
+            id="questionNumber"
+        >
+            CÂU 1
+        </span>
+
+
+        <span
+            class="question-type"
+            id="questionType"
+        >
+            TRẮC NGHIỆM
+        </span>
+
+    </div>
+
+
+    <div
+        class="question"
+        id="questionText"
+    ></div>
+
+
+    <!-- ANSWERS -->
+
+    <div
+        class="answers"
+        id="answers"
+    ></div>
+
+
+    <!-- SHORT ANSWER -->
+
+    <div
+        class="short-answer"
+        id="shortAnswer"
+        style="display:none"
+    >
+
+        <input
+            type="text"
+            id="shortInput"
+            placeholder="Nhập câu trả lời của em..."
+        >
+
+        <button
+            class="check-short"
+            onclick="checkShortAnswer()"
+        >
+            ✓ KIỂM TRA
+        </button>
+
+    </div>
+
+
+    <!-- FEEDBACK -->
+
+    <div
+        id="feedback"
+        class="feedback"
+    ></div>
+
+
+    <!-- SHOW ANSWER -->
+
+    <div class="show-answer">
+
+        <button
+            class="show-btn"
+            onclick="showAnswer()"
+        >
+            💡 HIỆN ĐÁP ÁN
+        </button>
+
+
+        <div
+            class="explanation"
+            id="explanation"
+        ></div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="navigation">
+
+        <button
+            class="nav-btn prev"
+            onclick="previousQuestion()"
+        >
+            ← CÂU TRƯỚC
+        </button>
+
+
+        <button
+            class="nav-btn next"
+            onclick="nextQuestion()"
+        >
+            CÂU TIẾP THEO →
+        </button>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="sidebar-title">
+
+        📋 BẢNG 20 CÂU HỎI
+
+    </div>
+
+
+    <div
+        class="question-grid"
+        id="questionGrid"
+    ></div>
+
+
+    <div class="score-box">
+
+        <div class="score-row">
+
+            <span>
+                Đã làm:
+            </span>
+
+            <span id="answeredCount">
+                0 / 20
+            </span>
+
+        </div>
+
+
+        <div class="score-row">
+
+            <span>
+                ✓ Đúng:
+            </span>
+
+            <span
+                class="correct-score"
+                id="correctCount"
+            >
+                0
+            </span>
+
+        </div>
+
+
+        <div class="score-row">
+
+            <span>
+                ✗ Sai:
+            </span>
+
+            <span
+                class="wrong-score"
+                id="wrongCount"
+            >
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+
+</aside>
+
+
+</main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     RESULT
+===================================================== -->
+
+<div
+    class="result"
+    id="result"
+>
+
+    <div class="result-card">
+
+        <h2>
+            🎉 HOÀN THÀNH!
+        </h2>
+
+
+        <div
+            class="final-score"
+            id="finalScore"
+        >
+            0 / 20
+        </div>
+
+
+        <div class="result-info">
+
+            <div class="result-item">
+
+                Đúng
+
+                <strong
+                    id="finalCorrect"
+                    class="correct-score"
+                >
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                Sai
+
+                <strong
+                    id="finalWrong"
+                    class="wrong-score"
+                >
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                Đã làm
+
+                <strong
+                    id="finalAnswered"
+                >
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <p id="finalMessage"></p>
+
+
+        <button
+            class="restart"
+            onclick="restartQuiz()"
+        >
+            🔄 LÀM LẠI
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   DỮ LIỆU 20 CÂU
+========================================================= */
+
+const questions = [
+
+/* =====================
+   10 TRẮC NGHIỆM
+===================== */
+
+{
+    type:"mcq",
+
+    question:
+        "Một thước có GHĐ 50 cm và ĐCNN 1 cm. Khi dùng thước này, kết quả đo nào sau đây phù hợp nhất?",
+
+    options:[
+        "75 cm",
+        "45 cm",
+        "0,5 m",
+        "1 m"
+    ],
+
+    answer:1,
+
+    explanation:
+        "Thước có GHĐ 50 cm nên kết quả đo không vượt quá 50 cm. Trong các lựa chọn, 45 cm phù hợp."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Khi đầu vật không đặt đúng tại vạch 0 của thước, cách xác định chiều dài vật phù hợp là gì?",
+
+    options:[
+        "Đọc ngay số ở đầu kia của vật",
+        "Lấy hiệu giữa hai số chỉ ở hai đầu vật",
+        "Lấy tổng hai số chỉ",
+        "Không thể đo được"
+    ],
+
+    answer:1,
+
+    explanation:
+        "Khi đầu vật không trùng vạch 0, chiều dài vật được xác định bằng hiệu giữa hai số chỉ tương ứng với hai đầu vật."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Một vật có khối lượng 1,25 kg. Giá trị này bằng bao nhiêu gam?",
+
+    options:[
+        "125 g",
+        "250 g",
+        "1250 g",
+        "12 500 g"
+    ],
+
+    answer:2,
+
+    explanation:
+        "1 kg = 1000 g nên 1,25 kg = 1250 g."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Một bao hàng có khối lượng 3 tạ. Khối lượng của bao hàng là:",
+
+    options:[
+        "30 kg",
+        "300 kg",
+        "3000 kg",
+        "30 000 kg"
+    ],
+
+    answer:1,
+
+    explanation:
+        "1 tạ = 100 kg nên 3 tạ = 300 kg."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Khi cân một vật bằng cân điện tử, vật nên được đặt như thế nào?",
+
+    options:[
+        "Đặt vật ở mép cân",
+        "Đặt vật lên mặt cân một cách ổn định",
+        "Cầm vật trên tay rồi đọc cân",
+        "Đặt vật cạnh cân"
+    ],
+
+    answer:1,
+
+    explanation:
+        "Vật cần được đặt ổn định trên mặt cân để cân xác định khối lượng chính xác."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Một bộ phim bắt đầu lúc 19 giờ 20 phút và kết thúc lúc 20 giờ 05 phút. Bộ phim kéo dài:",
+
+    options:[
+        "35 phút",
+        "40 phút",
+        "45 phút",
+        "50 phút"
+    ],
+
+    answer:2,
+
+    explanation:
+        "Từ 19 giờ 20 phút đến 20 giờ là 40 phút; thêm 5 phút là 45 phút."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Một cuộc chạy bắt đầu lúc 10 giờ 05 phút 15 giây và kết thúc lúc 10 giờ 05 phút 42 giây. Thời gian chạy là:",
+
+    options:[
+        "17 giây",
+        "27 giây",
+        "37 giây",
+        "42 giây"
+    ],
+
+    answer:1,
+
+    explanation:
+        "42 − 15 = 27 giây."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Thiết bị nào sau đây có thể dùng để đo nhiệt độ mà không cần tiếp xúc trực tiếp với vật?",
+
+    options:[
+        "Nhiệt kế hồng ngoại",
+        "Nhiệt kế rượu",
+        "Nhiệt kế y tế thủy ngân",
+        "Thước dây"
+    ],
+
+    answer:0,
+
+    explanation:
+        "Nhiệt kế hồng ngoại có thể đo nhiệt độ mà không cần tiếp xúc trực tiếp với vật."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Một cốc nước có nhiệt độ 35°C. Đại lượng 35°C cho biết điều gì?",
+
+    options:[
+        "Khối lượng của nước",
+        "Chiều dài của cốc",
+        "Mức độ nóng, lạnh của nước",
+        "Thời gian đun nước"
+    ],
+
+    answer:2,
+
+    explanation:
+        "Nhiệt độ cho biết mức độ nóng, lạnh của vật."
+},
+
+
+{
+    type:"mcq",
+
+    question:
+        "Khi thực hiện phép đo, vì sao cần ghi kết quả kèm theo đơn vị?",
+
+    options:[
+        "Để kết quả dài hơn",
+        "Để biết rõ giá trị đo thuộc đơn vị nào",
+        "Để làm đẹp bài làm",
+        "Không cần ghi đơn vị"
+    ],
+
+    answer:1,
+
+    explanation:
+        "Đơn vị cho biết đại lượng được đo theo chuẩn nào và giúp kết quả có ý nghĩa rõ ràng."
+},
+
+
+/* =====================
+   5 ĐÚNG SAI
+===================== */
+
+{
+    type:"tf",
+
+    question:
+        "Khi chọn thước để đo một vật, GHĐ của thước nên phù hợp với chiều dài cần đo.",
+
+    answer:true,
+
+    explanation:
+        "Đúng. Cần chọn dụng cụ có GHĐ phù hợp với đại lượng cần đo."
+},
+
+
+{
+    type:"tf",
+
+    question:
+        "Một chiếc cân có thể dùng để đo chiều dài của chiếc bàn.",
+
+    answer:false,
+
+    explanation:
+        "Sai. Cân dùng để đo khối lượng; chiều dài cần đo bằng thước."
+},
+
+
+{
+    type:"tf",
+
+    question:
+        "1 tấn bằng 10 lần 1 tạ.",
+
+    answer:true,
+
+    explanation:
+        "Đúng. 1 tấn = 1000 kg và 1 tạ = 100 kg nên 1 tấn = 10 tạ."
+},
+
+
+{
+    type:"tf",
+
+    question:
+        "Muốn xác định thời gian của một hoạt động, cần xác định thời điểm bắt đầu và thời điểm kết thúc.",
+
+    answer:true,
+
+    explanation:
+        "Đúng. Thời gian hoạt động được xác định dựa vào thời điểm kết thúc và thời điểm bắt đầu."
+},
+
+
+{
+    type:"tf",
+
+    question:
+        "Nhiệt kế nào cũng có thể sử dụng cho mọi mục đích đo nhiệt độ.",
+
+    answer:false,
+
+    explanation:
+        "Sai. Các loại nhiệt kế khác nhau phù hợp với những mục đích và đối tượng đo khác nhau."
+},
+
+
+/* =====================
+   5 TỰ LUẬN
+===================== */
+
+{
+    type:"short",
+
+    question:
+        "Một túi có 1,8 kg gạo. Người ta lấy ra 650 g. Hỏi túi còn lại bao nhiêu gam gạo?",
+
+    answer:[
+        "1150",
+        "1150g",
+        "1150 g",
+        "1,15kg",
+        "1,15 kg"
+    ],
+
+    displayAnswer:
+        "1150 g = 1,15 kg",
+
+    explanation:
+        "1,8 kg = 1800 g. Khối lượng còn lại: 1800 − 650 = 1150 g."
+},
+
+
+{
+    type:"short",
+
+    question:
+        "Một thùng hàng có 2,5 kg táo và 1,75 kg cam. Hỏi tổng khối lượng táo và cam là bao nhiêu kg?",
+
+    answer:[
+        "4,25",
+        "4,25kg",
+        "4,25 kg"
+    ],
+
+    displayAnswer:
+        "4,25 kg",
+
+    explanation:
+        "2,5 + 1,75 = 4,25 kg."
+},
+
+
+{
+    type:"short",
+
+    question:
+        "Một trận đấu bắt đầu lúc 15 giờ 10 phút và kết thúc lúc 16 giờ 00 phút. Trận đấu kéo dài bao nhiêu phút?",
+
+    answer:[
+        "50",
+        "50 phút"
+    ],
+
+    displayAnswer:
+        "50 phút",
+
+    explanation:
+        "Từ 15 giờ 10 phút đến 16 giờ là 50 phút."
+},
+
+
+{
+    type:"short",
+
+    question:
+        "Một bạn bắt đầu đạp xe lúc 7 giờ 25 phút 30 giây và kết thúc lúc 7 giờ 26 phút 10 giây. Bạn đạp xe trong bao lâu?",
+
+    answer:[
+        "40",
+        "40 giây",
+        "40s"
+    ],
+
+    displayAnswer:
+        "40 giây",
+
+    explanation:
+        "Từ 30 giây đến 60 giây là 30 giây, thêm 10 giây nữa là 40 giây."
+},
+
+
+{
+    type:"short",
+
+    question:
+        "Một nhiệt kế chỉ 28°C trước khi đặt vào nước. Sau khi chờ số chỉ ổn định, nhiệt kế chỉ 34°C. Hỏi nhiệt độ của nước là bao nhiêu?",
+
+    answer:[
+        "34",
+        "34°C",
+        "34 °C"
+    ],
+
+    displayAnswer:
+        "34°C",
+
+    explanation:
+        "Khi đo nhiệt độ cần chờ số chỉ ổn định rồi đọc kết quả. Vì vậy nhiệt độ của nước là 34°C."
+}
+
+];
+
+
+/* =========================================================
+   TRẠNG THÁI
+========================================================= */
+
+let currentQuestion = 0;
+
+
+/*
+   userAnswers:
+   - MCQ: số 0,1,2,3
+   - TF: true / false
+   - SHORT: chuỗi
+*/
+
+let userAnswers =
+    new Array(questions.length).fill(null);
+
+
+/*
+   answered:
+   câu đã từng trả lời hay chưa
+*/
+
+let answered =
+    new Array(questions.length).fill(false);
+
+
+/*
+   resultState:
+   trạng thái cuối cùng của câu:
+   true = đúng
+   false = sai
+   null = chưa làm
+*/
+
+let resultState =
+    new Array(questions.length).fill(null);
+
+
+/* =========================================================
+   ÂM THANH
+========================================================= */
+
+function playCorrectSound(){
+
+    try{
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        const ctx =
+            new AudioContext();
+
+
+        const now =
+            ctx.currentTime;
+
+
+        /*
+          Âm thanh 3 nốt vui nhộn
+        */
+
+        const notes =
+            [523.25,659.25,783.99];
+
+
+        notes.forEach(
+            (frequency,index)=>{
+
+                const oscillator =
+                    ctx.createOscillator();
+
+                const gain =
+                    ctx.createGain();
+
+
+                oscillator.connect(gain);
+
+                gain.connect(
+                    ctx.destination
+                );
+
+
+                oscillator.type =
+                    "sine";
+
+
+                oscillator.frequency.value =
+                    frequency;
+
+
+                const start =
+                    now +
+                    index * 0.09;
+
+
+                gain.gain.setValueAtTime(
+                    0.0001,
+                    start
+                );
+
+
+                gain.gain.exponentialRampToValueAtTime(
+                    0.20,
+                    start + 0.02
+                );
+
+
+                gain.gain.exponentialRampToValueAtTime(
+                    0.0001,
+                    start + 0.18
+                );
+
+
+                oscillator.start(start);
+
+                oscillator.stop(
+                    start + 0.2
+                );
+
+            }
+        );
+
+    }catch(e){
+
+        console.log(
+            "Không thể phát âm thanh."
+        );
+
+    }
+
+}
+
+
+function playWrongSound(){
+
+    try{
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        const ctx =
+            new AudioContext();
+
+
+        const oscillator =
+            ctx.createOscillator();
+
+        const gain =
+            ctx.createGain();
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            ctx.destination
+        );
+
+
+        oscillator.type =
+            "triangle";
+
+
+        oscillator.frequency.setValueAtTime(
+            300,
+            ctx.currentTime
+        );
+
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            130,
+            ctx.currentTime + 0.25
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            ctx.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.22,
+            ctx.currentTime + 0.02
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            ctx.currentTime + 0.3
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            ctx.currentTime + 0.3
+        );
+
+    }catch(e){
+
+        console.log(
+            "Không thể phát âm thanh."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   HIỂN THỊ CÂU
+========================================================= */
+
+function loadQuestion(){
+
+    const q =
+        questions[currentQuestion];
+
+
+    document.getElementById(
+        "questionNumber"
+    ).textContent =
+        "CÂU " +
+        (currentQuestion + 1);
+
+
+    document.getElementById(
+        "questionText"
+    ).textContent =
+        q.question;
+
+
+    document.getElementById(
+        "progressText"
+    ).textContent =
+        "Câu " +
+        (currentQuestion + 1) +
+        " / 20";
+
+
+    const progress =
+        ((currentQuestion + 1) / 20)
+        * 100;
+
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        progress + "%";
+
+
+    /* =====================
+       LOẠI CÂU
+    ===================== */
+
+    let typeText = "";
+
+
+    if(q.type === "mcq"){
+
+        typeText =
+            "TRẮC NGHIỆM";
+
+    }
+
+    if(q.type === "tf"){
+
+        typeText =
+            "ĐÚNG / SAI";
+
+    }
+
+    if(q.type === "short"){
+
+        typeText =
+            "TỰ LUẬN NGẮN";
+
+    }
+
+
+    document.getElementById(
+        "questionType"
+    ).textContent =
+        typeText;
+
+
+    const answers =
+        document.getElementById(
+            "answers"
+        );
+
+
+    const shortAnswer =
+        document.getElementById(
+            "shortAnswer"
+        );
+
+
+    answers.innerHTML = "";
+
+
+    shortAnswer.style.display =
+        "none";
+
+
+    /* =====================
+       MCQ
+    ===================== */
+
+    if(q.type === "mcq"){
+
+        answers.style.display =
+            "grid";
+
+
+        const labels =
+            ["A","B","C","D"];
+
+
+        q.options.forEach(
+            (option,index)=>{
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.className =
+                    "answer";
+
+
+                button.innerHTML =
+                    `
+                    <span
+                        class="answer-label"
+                    >
+                        ${labels[index]}
+                    </span>
+
+                    ${option}
+                    `;
+
+
+                button.onclick =
+                    function(){
+
+                        selectMCQ(index);
+
+                    };
+
+
+                answers.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        restoreMCQ();
+
+    }
+
+
+    /* =====================
+       TRUE / FALSE
+    ===================== */
+
+    if(q.type === "tf"){
+
+        answers.style.display =
+            "block";
+
+
+        const container =
+            document.createElement(
+                "div"
+            );
+
+
+        container.className =
+            "tf-container";
+
+
+        const trueBtn =
+            document.createElement(
+                "button"
+            );
+
+
+        trueBtn.className =
+            "tf-button tf-true";
+
+
+        trueBtn.innerHTML =
+            "✓ ĐÚNG";
+
+
+        trueBtn.onclick =
+            function(){
+
+                selectTF(true);
+
+            };
+
+
+        const falseBtn =
+            document.createElement(
+                "button"
+            );
+
+
+        falseBtn.className =
+            "tf-button tf-false";
+
+
+        falseBtn.innerHTML =
+            "✗ SAI";
+
+
+        falseBtn.onclick =
+            function(){
+
+                selectTF(false);
+
+            };
+
+
+        container.appendChild(
+            trueBtn
+        );
+
+        container.appendChild(
+            falseBtn
+        );
+
+
+        answers.appendChild(
+            container
+        );
+
+
+        restoreTF();
+
+    }
+
+
+    /* =====================
+       SHORT ANSWER
+    ===================== */
+
+    if(q.type === "short"){
+
+        answers.style.display =
+            "none";
+
+
+        shortAnswer.style.display =
+            "block";
+
+
+        document.getElementById(
+            "shortInput"
+        ).value =
+            userAnswers[currentQuestion]
+            || "";
+
+    }
+
+
+    /* =====================
+       FEEDBACK
+    ===================== */
+
+    if(
+        answered[currentQuestion]
+    ){
+
+        showFeedback(
+            resultState[currentQuestion]
+        );
+
+    }else{
+
+        clearFeedback();
+
+    }
+
+
+    document.getElementById(
+        "explanation"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "explanation"
+    ).innerHTML =
+        "";
+
+
+    updateQuestionGrid();
+
+    updateScore();
+
+}
+
+
+/* =========================================================
+   MCQ
+========================================================= */
+
+function selectMCQ(index){
+
+    const q =
+        questions[currentQuestion];
+
+
+    /*
+      QUAN TRỌNG:
+      Không khóa câu hỏi.
+      Học sinh có thể chọn lại.
+    */
+
+    userAnswers[currentQuestion] =
+        index;
+
+
+    answered[currentQuestion] =
+        true;
+
+
+    const isCorrect =
+        index === q.answer;
+
+
+    resultState[currentQuestion] =
+        isCorrect;
+
+
+    updateMCQColors(index);
+
+
+    if(isCorrect){
+
+        playCorrectSound();
+
+    }else{
+
+        playWrongSound();
+
+    }
+
+
+    showFeedback(
+        isCorrect
+    );
+
+
+    updateQuestionGrid();
+
+    updateScore();
+
+}
+
+
+/* =========================================================
+   TÔ MÀU MCQ
+========================================================= */
+
+function updateMCQColors(selected){
+
+    const q =
+        questions[currentQuestion];
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".answer"
+        );
+
+
+    buttons.forEach(
+        (button,index)=>{
+
+            button.classList.remove(
+                "correct",
+                "wrong"
+            );
+
+
+            /*
+              Nếu lựa chọn hiện tại đúng
+            */
+
+            if(
+                index === selected &&
+                selected === q.answer
+            ){
+
+                button.classList.add(
+                    "correct"
+                );
+
+            }
+
+
+            /*
+              Nếu lựa chọn hiện tại sai
+            */
+
+            if(
+                index === selected &&
+                selected !== q.answer
+            ){
+
+                button.classList.add(
+                    "wrong"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   KHÔI PHỤC MCQ
+========================================================= */
+
+function restoreMCQ(){
+
+    if(
+        !answered[currentQuestion]
+    ){
+
+        return;
+
+    }
+
+
+    const selected =
+        userAnswers[currentQuestion];
+
+
+    updateMCQColors(
+        selected
+    );
+
+}
+
+
+/* =========================================================
+   TRUE / FALSE
+========================================================= */
+
+function selectTF(value){
+
+    const q =
+        questions[currentQuestion];
+
+
+    userAnswers[currentQuestion] =
+        value;
+
+
+    answered[currentQuestion] =
+        true;
+
+
+    const isCorrect =
+        value === q.answer;
+
+
+    resultState[currentQuestion] =
+        isCorrect;
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".tf-button"
+        );
+
+
+    buttons.forEach(
+        button=>{
+
+            button.style.boxShadow =
+                "none";
+
+        }
+    );
+
+
+    /*
+       Nút Đúng
+    */
+
+    if(value === true){
+
+        buttons[0].style.boxShadow =
+            isCorrect
+            ? "0 0 0 5px rgba(33,169,87,.25)"
+            : "0 0 0 5px rgba(229,57,53,.20)";
+
+    }
+
+
+    /*
+       Nút Sai
+    */
+
+    if(value === false){
+
+        buttons[1].style.boxShadow =
+            isCorrect
+            ? "0 0 0 5px rgba(33,169,87,.25)"
+            : "0 0 0 5px rgba(229,57,53,.20)";
+
+    }
+
+
+    if(isCorrect){
+
+        playCorrectSound();
+
+    }else{
+
+        playWrongSound();
+
+    }
+
+
+    showFeedback(
+        isCorrect
+    );
+
+
+    updateQuestionGrid();
+
+    updateScore();
+
+}
+
+
+/* =========================================================
+   KHÔI PHỤC TRUE/FALSE
+========================================================= */
+
+function restoreTF(){
+
+    if(
+        !answered[currentQuestion]
+    ){
+
+        return;
+
+    }
+
+
+    const value =
+        userAnswers[currentQuestion];
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".tf-button"
+        );
+
+
+    const isCorrect =
+        value === q.answer;
+
+
+    if(value === true){
+
+        buttons[0].style.boxShadow =
+            isCorrect
+            ? "0 0 0 5px rgba(33,169,87,.25)"
+            : "0 0 0 5px rgba(229,57,53,.20)";
+
+    }
+
+
+    if(value === false){
+
+        buttons[1].style.boxShadow =
+            isCorrect
+            ? "0 0 0 5px rgba(33,169,87,.25)"
+            : "0 0 0 5px rgba(229,57,53,.20)";
+
+    }
+
+}
+
+
+/* =========================================================
+   TỰ LUẬN
+========================================================= */
+
+function checkShortAnswer(){
+
+    const q =
+        questions[currentQuestion];
+
+
+    const input =
+        document.getElementById(
+            "shortInput"
+        );
+
+
+    const value =
+        input.value.trim();
+
+
+    if(value === ""){
+
+        alert(
+            "Em hãy nhập câu trả lời trước nhé!"
+        );
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    userAnswers[currentQuestion] =
+        value;
+
+
+    answered[currentQuestion] =
+        true;
+
+
+    const normalized =
+        normalizeAnswer(value);
+
+
+    const isCorrect =
+        q.answer.some(
+            answer =>
+                normalizeAnswer(answer)
+                ===
+                normalized
+        );
+
+
+    resultState[currentQuestion] =
+        isCorrect;
+
+
+    if(isCorrect){
+
+        playCorrectSound();
+
+    }else{
+
+        playWrongSound();
+
+    }
+
+
+    showFeedback(
+        isCorrect
+    );
+
+
+    updateQuestionGrid();
+
+    updateScore();
+
+}
+
+
+/* =========================================================
+   CHUẨN HÓA TỰ LUẬN
+========================================================= */
+
+function normalizeAnswer(text){
+
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g," ")
+        .replace(/,/g,".")
+        .replace(/°c/g,"")
+        .replace(/kg/g,"")
+        .replace(/g/g,"")
+        .replace(/phút/g,"")
+        .replace(/giây/g,"")
+        .replace(/s$/,"")
+        .trim();
+
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+function showFeedback(isCorrect){
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    feedback.className =
+        "feedback " +
+        (
+            isCorrect
+            ? "correct-feedback"
+            : "wrong-feedback"
+        );
+
+
+    if(isCorrect){
+
+        feedback.innerHTML =
+            `
+            🎉 <strong>CHÍNH XÁC!</strong>
+            <br>
+            Em đã chọn đáp án đúng.
+            `;
+
+    }else{
+
+        let answerText = "";
+
+
+        if(q.type === "mcq"){
+
+            const letter =
+                ["A","B","C","D"]
+                [q.answer];
+
+
+            answerText =
+                `${letter}. ${q.options[q.answer]}`;
+
+        }
+
+
+        if(q.type === "tf"){
+
+            answerText =
+                q.answer
+                ? "ĐÚNG"
+                : "SAI";
+
+        }
+
+
+        if(q.type === "short"){
+
+            answerText =
+                q.displayAnswer;
+
+        }
+
+
+        feedback.innerHTML =
+            `
+            ❌ <strong>CHƯA ĐÚNG!</strong>
+            <br>
+            Đáp án đúng:
+            <strong>${answerText}</strong>
+            `;
+
+    }
+
+}
+
+
+/* =========================================================
+   XÓA FEEDBACK
+========================================================= */
+
+function clearFeedback(){
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.className =
+        "feedback";
+
+
+    feedback.innerHTML =
+        "";
+
+}
+
+
+/* =========================================================
+   HIỆN ĐÁP ÁN
+========================================================= */
+
+function showAnswer(){
+
+    const q =
+        questions[currentQuestion];
+
+
+    const explanation =
+        document.getElementById(
+            "explanation"
+        );
+
+
+    let answerText = "";
+
+
+    if(q.type === "mcq"){
+
+        const letter =
+            ["A","B","C","D"]
+            [q.answer];
+
+
+        answerText =
+            `<strong>
+                ĐÁP ÁN: ${letter}. ${q.options[q.answer]}
+             </strong>`;
+
+    }
+
+
+    if(q.type === "tf"){
+
+        answerText =
+            `<strong>
+                ĐÁP ÁN: ${q.answer ? "ĐÚNG" : "SAI"}
+             </strong>`;
+
+    }
+
+
+    if(q.type === "short"){
+
+        answerText =
+            `<strong>
+                ĐÁP ÁN: ${q.displayAnswer}
+             </strong>`;
+
+    }
+
+
+    explanation.innerHTML =
+        `
+        ${answerText}
+
+        <br><br>
+
+        ${q.explanation}
+        `;
+
+
+    explanation.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   BẢNG 20 CÂU
+========================================================= */
+
+function createQuestionGrid(){
+
+    const grid =
+        document.getElementById(
+            "questionGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    for(
+        let i=0;
+        i<questions.length;
+        i++
+    ){
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.className =
+            "question-btn";
+
+
+        button.textContent =
+            i + 1;
+
+
+        button.onclick =
+            function(){
+
+                currentQuestion =
+                    i;
+
+                loadQuestion();
+
+            };
+
+
+        grid.appendChild(
+            button
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CẬP NHẬT BẢNG
+========================================================= */
+
+function updateQuestionGrid(){
+
+    const buttons =
+        document.querySelectorAll(
+            ".question-btn"
+        );
+
+
+    buttons.forEach(
+        (button,index)=>{
+
+            button.classList.remove(
+                "active",
+                "correct-state",
+                "wrong-state"
+            );
+
+
+            /*
+               Câu hiện tại
+            */
+
+            if(
+                index === currentQuestion
+            ){
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            /*
+               Trạng thái cuối cùng
+            */
+
+            if(
+                answered[index]
+            ){
+
+                if(
+                    resultState[index]
+                    === true
+                ){
+
+                    button.classList.add(
+                        "correct-state"
+                    );
+
+                }else{
+
+                    button.classList.add(
+                        "wrong-state"
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ĐIỂM
+========================================================= */
+
+function calculateScore(){
+
+    let correct = 0;
+
+    let wrong = 0;
+
+    let total = 0;
+
+
+    for(
+        let i=0;
+        i<questions.length;
+        i++
+    ){
+
+        if(
+            answered[i]
+        ){
+
+            total++;
+
+
+            if(
+                resultState[i]
+                === true
+            ){
+
+                correct++;
+
+            }else{
+
+                wrong++;
+
+            }
+
+        }
+
+    }
+
+
+    return {
+        correct,
+        wrong,
+        total
+    };
+
+}
+
+
+function updateScore(){
+
+    const score =
+        calculateScore();
+
+
+    document.getElementById(
+        "answeredCount"
+    ).textContent =
+        score.total +
+        " / 20";
+
+
+    document.getElementById(
+        "correctCount"
+    ).textContent =
+        score.correct;
+
+
+    document.getElementById(
+        "wrongCount"
+    ).textContent =
+        score.wrong;
+
+}
+
+
+/* =========================================================
+   CÂU TRƯỚC
+========================================================= */
+
+function previousQuestion(){
+
+    if(
+        currentQuestion > 0
+    ){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+}
+
+
+/* =========================================================
+   CÂU TIẾP THEO
+========================================================= */
+
+function nextQuestion(){
+
+    if(
+        currentQuestion <
+        questions.length - 1
+    ){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }else{
+
+        showResult();
+
+    }
+
+}
+
+
+/* =========================================================
+   KẾT QUẢ
+========================================================= */
+
+function showResult(){
+
+    const score =
+        calculateScore();
+
+
+    document.getElementById(
+        "finalScore"
+    ).textContent =
+        score.correct +
+        " / 20";
+
+
+    document.getElementById(
+        "finalCorrect"
+    ).textContent =
+        score.correct;
+
+
+    document.getElementById(
+        "finalWrong"
+    ).textContent =
+        score.wrong;
+
+
+    document.getElementById(
+        "finalAnswered"
+    ).textContent =
+        score.total;
+
+
+    let message = "";
+
+
+    if(score.correct === 20){
+
+        message =
+            "🏆 Tuyệt vời! Em đã hoàn thành xuất sắc!";
+
+    }
+    else if(score.correct >= 16){
+
+        message =
+            "🌟 Rất tốt! Em đã nắm khá chắc kiến thức.";
+
+    }
+    else if(score.correct >= 10){
+
+        message =
+            "👍 Khá tốt! Hãy xem lại những câu còn nhầm nhé.";
+
+    }
+    else{
+
+        message =
+            "📚 Em hãy ôn lại Chủ đề 1 và thử sức lại nhé!";
+
+    }
+
+
+    document.getElementById(
+        "finalMessage"
+    ).textContent =
+        message;
+
+
+    document.getElementById(
+        "result"
+    ).style.display =
+        "flex";
+
+
+    playCorrectSound();
+
+}
+
+
+/* =========================================================
+   LÀM LẠI
+========================================================= */
+
+function restartQuiz(){
+
+    currentQuestion = 0;
+
+
+    userAnswers =
+        new Array(
+            questions.length
+        ).fill(null);
+
+
+    answered =
+        new Array(
+            questions.length
+        ).fill(false);
+
+
+    resultState =
+        new Array(
+            questions.length
+        ).fill(null);
+
+
+    document.getElementById(
+        "result"
+    ).style.display =
+        "none";
+
+
+    loadQuestion();
+
+}
+
+
+/* =========================================================
+   KHỞI ĐỘNG
+========================================================= */
+
+createQuestionGrid();
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
