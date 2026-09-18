@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ôn tập Chủ đề 1 – Các phép đo</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+    color: #1e293b;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* ================= START ================= */
+
+#startScreen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-box {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 35px;
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.12);
+    text-align: center;
+}
+
+.start-box h1 {
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+.start-box h2 {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 13px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.start-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.start-btn:hover {
+    background: #1d4ed8;
+}
+
+/* ================= MAIN ================= */
+
+#quizScreen {
+    display: none;
+}
+
+.header {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.header h1 {
+    text-align: center;
+    color: #2563eb;
+    margin: 0 0 10px;
+}
+
+.student-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 20px;
+}
+
+/* ================= QUESTION ================= */
+
+.question-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.question-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.option {
+    padding: 13px 15px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.option:hover {
+    background: #eff6ff;
+}
+
+.option.selected {
+    border-color: #2563eb;
+    background: #dbeafe;
+}
+
+.option.correct {
+    background: #dcfce7;
+    border-color: #16a34a;
+    color: #166534;
+}
+
+.option.wrong {
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #991b1b;
+}
+
+.feedback {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: none;
+}
+
+.feedback.correct-feedback {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.feedback.wrong-feedback {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.answer-box {
+    display: none;
+    margin-top: 12px;
+    padding: 12px;
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+/* ================= SHORT ANSWER ================= */
+
+.short-input {
+    width: 100%;
+    padding: 13px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.check-btn,
+.answer-btn {
+    margin-top: 10px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.check-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.answer-btn {
+    background: #f59e0b;
+    color: white;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.question-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.q-number {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 5px;
+    cursor: pointer;
+    background: #e2e8f0;
+    font-weight: bold;
+}
+
+.q-number.answered {
+    background: #bfdbfe;
+}
+
+.q-number.correct {
+    background: #86efac;
+}
+
+.q-number.wrong {
+    background: #fca5a5;
+}
+
+/* ================= BUTTON ================= */
+
+.submit-box {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.submit-btn {
+    padding: 15px 35px;
+    border: none;
+    border-radius: 12px;
+    background: #16a34a;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #15803d;
+}
+
+.score-box {
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.status {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 800px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= START SCREEN ================= -->
+
+<div id="startScreen">
+    <div class="start-box">
+
+        <h1>ÔN TẬP CHỦ ĐỀ 1</h1>
+        <h2>CÁC PHÉP ĐO</h2>
+
+        <div class="input-group">
+            <label>Họ và tên học sinh</label>
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Nhập họ và tên..."
+            >
+        </div>
+
+        <div class="input-group">
+            <label>Lớp</label>
+
+            <select id="studentClass">
+                <option value="">-- Chọn lớp --</option>
+                <option value="7/1">7/1</option>
+                <option value="7/2">7/2</option>
+                <option value="7/3">7/3</option>
+                <option value="7/4">7/4</option>
+                <option value="7/5">7/5</option>
+                <option value="7/6">7/6</option>
+                <option value="7/7">7/7</option>
+                <option value="7/8">7/8</option>
+                <option value="7/9">7/9</option>
+                <option value="7/10">7/10</option>
+                <option value="7/11">7/11</option>
+            </select>
+        </div>
+
+        <button class="start-btn" onclick="startQuiz()">
+            ▶ BẮT ĐẦU LÀM BÀI
+        </button>
+
+    </div>
+</div>
+
+
+<!-- ================= QUIZ SCREEN ================= -->
+
+<div id="quizScreen">
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>ÔN TẬP CHỦ ĐỀ 1 – CÁC PHÉP ĐO</h1>
+
+        <div class="student-info">
+            <span>👤 Họ tên: <span id="displayName"></span></span>
+            <span>🏫 Lớp: <span id="displayClass"></span></span>
+            <span>⭐ Điểm: <span id="currentScore">0.0</span>/10</span>
+        </div>
+
+    </div>
+
+
+    <div class="layout">
+
+        <!-- ================= QUESTIONS ================= -->
+
+        <div id="questionsContainer"></div>
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <div class="sidebar">
+
+            <h3>📋 DANH SÁCH CÂU</h3>
+
+            <div class="question-grid" id="questionGrid"></div>
+
+            <hr>
+
+            <div>
+                <b>🟩 Đúng</b><br>
+                <b>🟥 Sai</b><br>
+                <b>🟦 Đã trả lời</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SUBMIT ================= -->
+
+    <div class="submit-box">
+
+        <button class="submit-btn" onclick="submitResult()">
+            📤 NỘP KẾT QUẢ
+        </button>
+
+        <div class="score-box">
+            Điểm cuối cùng:
+            <span id="finalScore">0.0</span>/10
+        </div>
+
+        <div id="submitStatus" class="status"></div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   CẤU HÌNH GOOGLE APPS SCRIPT
+===================================================== */
+
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyYjbt3H-Eu4R6hDSYtzk34Z7QOEtuv4sBCV6SgVfhf0MackjpbkldYbd3cE56DRcO_/exec";
+
+const TEST_NAME = "Ôn tập Chủ đề 1 – Các phép đo";
+
+
+/* =====================================================
+   CÂU HỎI
+===================================================== */
+
+const questions = [
+
+{
+    type:"mcq",
+    question:"Khi cần đo chiều dài của một chiếc bàn học khoảng 1,2 m, dụng cụ nào phù hợp nhất?",
+    options:[
+        "Thước kẻ GHĐ 20 cm",
+        "Thước mét GHĐ 1 m",
+        "Thước cuộn GHĐ 5 m",
+        "Thước kẻ GHĐ 10 cm"
+    ],
+    answer:2,
+    explanation:"Thước cuộn có GHĐ 5 m phù hợp để đo chiều dài khoảng 1,2 m."
+},
+
+{
+    type:"mcq",
+    question:"Một thước có GHĐ 30 cm và ĐCNN 1 mm. Giá trị lớn nhất có thể đo bằng thước là:",
+    options:[
+        "1 mm",
+        "10 cm",
+        "30 cm",
+        "31 cm"
+    ],
+    answer:2,
+    explanation:"GHĐ cho biết giá trị lớn nhất mà dụng cụ có thể đo."
+},
+
+{
+    type:"mcq",
+    question:"Muốn đo khối lượng một bao gạo, dụng cụ phù hợp là:",
+    options:[
+        "Thước",
+        "Cân",
+        "Đồng hồ bấm giây",
+        "Nhiệt kế"
+    ],
+    answer:1,
+    explanation:"Cân dùng để đo khối lượng."
+},
+
+{
+    type:"mcq",
+    question:"500 g bằng bao nhiêu kg?",
+    options:[
+        "0,05 kg",
+        "0,5 kg",
+        "5 kg",
+        "50 kg"
+    ],
+    answer:1,
+    explanation:"1 kg = 1000 g nên 500 g = 0,5 kg."
+},
+
+{
+    type:"mcq",
+    question:"Muốn đo thời gian chạy 100 m của một học sinh, dụng cụ phù hợp nhất là:",
+    options:[
+        "Thước",
+        "Cân",
+        "Đồng hồ bấm giây",
+        "Nhiệt kế"
+    ],
+    answer:2,
+    explanation:"Đồng hồ bấm giây dùng để đo khoảng thời gian ngắn."
+},
+
+{
+    type:"mcq",
+    question:"Một học sinh bắt đầu chạy lúc 9 giờ 15 phút và kết thúc lúc 9 giờ 35 phút. Thời gian chạy là:",
+    options:[
+        "10 phút",
+        "15 phút",
+        "20 phút",
+        "25 phút"
+    ],
+    answer:2,
+    explanation:"9 giờ 35 phút − 9 giờ 15 phút = 20 phút."
+},
+
+{
+    type:"mcq",
+    question:"Dụng cụ thích hợp để đo thân nhiệt của người là:",
+    options:[
+        "Nhiệt kế y tế",
+        "Thước",
+        "Cân điện tử",
+        "Đồng hồ bấm giây"
+    ],
+    answer:0,
+    explanation:"Nhiệt kế y tế được sử dụng để đo thân nhiệt."
+},
+
+{
+    type:"mcq",
+    question:"Khi đo nhiệt độ bằng nhiệt kế, vì sao cần chờ số chỉ ổn định rồi mới đọc?",
+    options:[
+        "Để nhiệt kế đẹp hơn",
+        "Để kết quả đo chính xác hơn",
+        "Để giảm GHĐ",
+        "Để tăng ĐCNN"
+    ],
+    answer:1,
+    explanation:"Cần chờ số chỉ ổn định để nhiệt kế đạt trạng thái cân bằng nhiệt với vật cần đo."
+},
+
+{
+    type:"mcq",
+    question:"3 kg bằng:",
+    options:[
+        "30 g",
+        "300 g",
+        "3000 g",
+        "30000 g"
+    ],
+    answer:2,
+    explanation:"1 kg = 1000 g nên 3 kg = 3000 g."
+},
+
+{
+    type:"mcq",
+    question:"Để xác định thời gian diễn ra một hoạt động, cần biết:",
+    options:[
+        "Chỉ thời điểm bắt đầu",
+        "Chỉ thời điểm kết thúc",
+        "Thời điểm bắt đầu và thời điểm kết thúc",
+        "Chỉ ngày thực hiện"
+    ],
+    answer:2,
+    explanation:"Thời gian diễn ra = thời điểm kết thúc − thời điểm bắt đầu."
+},
+
+
+/* ================= ĐÚNG SAI ================= */
+
+{
+    type:"tf",
+    question:"Nếu vật dài hơn GHĐ của thước, có thể đo lần lượt từng đoạn rồi cộng các kết quả.",
+    answer:true,
+    explanation:"Đúng. Có thể chia vật thành các đoạn phù hợp với GHĐ rồi cộng kết quả."
+},
+
+{
+    type:"tf",
+    question:"Thước có ĐCNN càng lớn thì luôn đo được vật có chiều dài càng lớn.",
+    answer:false,
+    explanation:"Sai. GHĐ quyết định giá trị lớn nhất có thể đo; ĐCNN thể hiện độ chia nhỏ nhất."
+},
+
+{
+    type:"tf",
+    question:"Khi dùng cân điện tử, cần đọc giá trị đo kèm theo đơn vị.",
+    answer:true,
+    explanation:"Đúng. Giá trị đo cần đi kèm đơn vị phù hợp."
+},
+
+{
+    type:"tf",
+    question:"Khi tính thời gian của một hoạt động, chỉ cần biết thời điểm kết thúc.",
+    answer:false,
+    explanation:"Sai. Cần biết cả thời điểm bắt đầu và thời điểm kết thúc."
+},
+
+{
+    type:"tf",
+    question:"Có thể sử dụng các loại nhiệt kế khác nhau cho những mục đích đo nhiệt độ khác nhau.",
+    answer:true,
+    explanation:"Đúng. Mỗi loại nhiệt kế có phạm vi và mục đích sử dụng phù hợp."
+},
+
+
+/* ================= TỰ LUẬN NGẮN ================= */
+
+{
+    type:"short",
+    question:"Một túi có 750 g gạo, thêm 250 g gạo nữa. Tổng khối lượng là bao nhiêu gam và bao nhiêu kilôgam?",
+    answers:["1000g","1000 g","1kg","1 kg"],
+    displayAnswer:"1000 g = 1 kg",
+    explanation:"750 g + 250 g = 1000 g = 1 kg."
+},
+
+{
+    type:"short",
+    question:"Một vật có khối lượng 2 kg. Lấy ra 750 g. Khối lượng còn lại là bao nhiêu gam?",
+    answers:["1250g","1250 g"],
+    displayAnswer:"1250 g",
+    explanation:"2 kg = 2000 g. 2000 − 750 = 1250 g."
+},
+
+{
+    type:"short",
+    question:"Một hoạt động bắt đầu lúc 7 giờ 15 phút và kết thúc lúc 8 giờ. Hoạt động kéo dài bao lâu?",
+    answers:["45 phút","45phút","45"],
+    displayAnswer:"45 phút",
+    explanation:"8 giờ − 7 giờ 15 phút = 45 phút."
+},
+
+{
+    type:"short",
+    question:"Một vận động viên bắt đầu chạy lúc 6:30:20 và kết thúc lúc 6:31:05. Thời gian chạy là bao nhiêu giây?",
+    answers:["45 giây","45giây","45s","45"],
+    displayAnswer:"45 giây",
+    explanation:"6:31:05 − 6:30:20 = 45 giây."
+},
+
+{
+    type:"short",
+    question:"Khi đo nhiệt độ nước, nhiệt kế chỉ 28°C lúc đầu rồi tăng dần và ổn định ở 32°C. Nhiệt độ cuối cùng của nước là bao nhiêu và tại sao phải chờ số chỉ ổn định?",
+    answers:["32","32°C","32 độ c","32 độ"],
+    displayAnswer:"32°C. Cần chờ số chỉ ổn định để kết quả đo chính xác.",
+    explanation:"Nhiệt kế cần đạt trạng thái cân bằng nhiệt với nước trước khi đọc kết quả."
+}
+
+];
+
+
+let studentName = "";
+let studentClass = "";
+
+let userAnswers = new Array(questions.length).fill(null);
+let checked = new Array(questions.length).fill(false);
+
+
+/* =====================================================
+   ÂM THANH
+===================================================== */
+
+function playSound(correct) {
+
+    try {
+
+        const AudioContext =
+            window.AudioContext || window.webkitAudioContext;
+
+        const ctx = new AudioContext();
+
+        const oscillator = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        oscillator.connect(gain);
+        gain.connect(ctx.destination);
+
+        if(correct) {
+            oscillator.frequency.value = 800;
+        } else {
+            oscillator.frequency.value = 220;
+        }
+
+        oscillator.type = "sine";
+
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            ctx.currentTime + 0.25
+        );
+
+        oscillator.start();
+        oscillator.stop(ctx.currentTime + 0.25);
+
+    } catch(e) {}
+
+}
+
+
+/* =====================================================
+   BẮT ĐẦU
+===================================================== */
+
+function startQuiz() {
+
+    studentName =
+        document.getElementById("studentName").value.trim();
+
+    studentClass =
+        document.getElementById("studentClass").value;
+
+    if(!studentName) {
+        alert("Vui lòng nhập họ và tên.");
+        return;
+    }
+
+    if(!studentClass) {
+        alert("Vui lòng chọn lớp.");
+        return;
+    }
+
+    document.getElementById("displayName").textContent =
+        studentName;
+
+    document.getElementById("displayClass").textContent =
+        studentClass;
+
+    document.getElementById("startScreen").style.display = "none";
+
+    document.getElementById("quizScreen").style.display = "block";
+
+    renderQuestions();
+
+    window.scrollTo(0,0);
+}
+
+
+/* =====================================================
+   HIỂN THỊ CÂU HỎI
+===================================================== */
+
+function renderQuestions() {
+
+    const container =
+        document.getElementById("questionsContainer");
+
+    container.innerHTML = "";
+
+    questions.forEach((q,index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "question-card";
+
+        card.id = "question-" + index;
+
+        let html = `
+            <div class="question-title">
+                Câu ${index+1}. ${q.question}
+            </div>
+        `;
+
+
+        /* ===== MCQ ===== */
+
+        if(q.type === "mcq") {
+
+            q.options.forEach((option,i) => {
+
+                html += `
+                    <div
+                        class="option"
+                        id="option-${index}-${i}"
+                        onclick="selectMCQ(${index},${i})"
+                    >
+                        <b>${String.fromCharCode(65+i)}.</b>
+                        ${option}
+                    </div>
+                `;
+
+            });
+
+        }
+
+
+        /* ===== TRUE FALSE ===== */
+
+        if(q.type === "tf") {
+
+            html += `
+                <div
+                    class="option"
+                    id="option-${index}-true"
+                    onclick="selectTF(${index},true)"
+                >
+                    <b>A.</b> Đúng
+                </div>
+
+                <div
+                    class="option"
+                    id="option-${index}-false"
+                    onclick="selectTF(${index},false)"
+                >
+                    <b>B.</b> Sai
+                </div>
+            `;
+
+        }
+
+
+        /* ===== SHORT ANSWER ===== */
+
+        if(q.type === "short") {
+
+            html += `
+                <input
+                    class="short-input"
+                    id="short-${index}"
+                    placeholder="Nhập câu trả lời..."
+                    oninput="updateShort(${index})"
+                >
+
+                <br>
+
+                <button
+                    class="check-btn"
+                    onclick="checkShort(${index})"
+                >
+                    ✓ KIỂM TRA
+                </button>
+            `;
+
+        }
+
+
+        html += `
+            <div
+                class="feedback"
+                id="feedback-${index}"
+            ></div>
+
+            <div
+                class="answer-box"
+                id="answer-${index}"
+            ></div>
+
+            <button
+                class="answer-btn"
+                onclick="showAnswer(${index})"
+            >
+                💡 HIỆN ĐÁP ÁN
+            </button>
+        `;
+
+        card.innerHTML = html;
+
+        container.appendChild(card);
+
+    });
+
+
+    renderGrid();
+
+}
+
+
+/* =====================================================
+   MCQ
+===================================================== */
+
+function selectMCQ(index,choice) {
+
+    userAnswers[index] = choice;
+
+    checked[index] = true;
+
+    const q = questions[index];
+
+    q.options.forEach((_,i) => {
+
+        const el =
+            document.getElementById(`option-${index}-${i}`);
+
+        el.classList.remove(
+            "selected",
+            "correct",
+            "wrong"
+        );
+
+    });
+
+
+    const selected =
+        document.getElementById(
+            `option-${index}-${choice}`
+        );
+
+    if(choice === q.answer) {
+
+        selected.classList.add("correct");
+
+        showFeedback(
+            index,
+            true,
+            "✓ Chính xác!"
+        );
+
+        playSound(true);
+
+    } else {
+
+        selected.classList.add("wrong");
+
+        const correctOption =
+            document.getElementById(
+                `option-${index}-${q.answer}`
+            );
+
+        correctOption.classList.add("correct");
+
+        showFeedback(
+            index,
+            false,
+            "✗ Chưa đúng! Em có thể chọn lại."
+        );
+
+        playSound(false);
+
+    }
+
+    updateScore();
+
+    renderGrid();
+}
+
+
+/* =====================================================
+   TRUE / FALSE
+===================================================== */
+
+function selectTF(index,value) {
+
+    userAnswers[index] = value;
+
+    checked[index] = true;
+
+    const q = questions[index];
+
+    const trueEl =
+        document.getElementById(`option-${index}-true`);
+
+    const falseEl =
+        document.getElementById(`option-${index}-false`);
+
+    trueEl.classList.remove(
+        "selected",
+        "correct",
+        "wrong"
+    );
+
+    falseEl.classList.remove(
+        "selected",
+        "correct",
+        "wrong"
+    );
+
+
+    const selected =
+        value ? trueEl : falseEl;
+
+    if(value === q.answer) {
+
+        selected.classList.add("correct");
+
+        showFeedback(
+            index,
+            true,
+            "✓ Chính xác!"
+        );
+
+        playSound(true);
+
+    } else {
+
+        selected.classList.add("wrong");
+
+        const correctEl =
+            q.answer ? trueEl : falseEl;
+
+        correctEl.classList.add("correct");
+
+        showFeedback(
+            index,
+            false,
+            "✗ Chưa đúng! Em có thể chọn lại."
+        );
+
+        playSound(false);
+
+    }
+
+    updateScore();
+
+    renderGrid();
+}
+
+
+/* =====================================================
+   CÂU TRẢ LỜI NGẮN
+===================================================== */
+
+function updateShort(index) {
+
+    const value =
+        document.getElementById(`short-${index}`).value.trim();
+
+    userAnswers[index] = value;
+
+}
+
+
+/* =====================================================
+   KIỂM TRA CÂU NGẮN
+===================================================== */
+
+function checkShort(index) {
+
+    const q = questions[index];
+
+    const input =
+        document.getElementById(`short-${index}`);
+
+    const value =
+        input.value.trim().toLowerCase();
+
+    if(!value) {
+
+        alert("Em hãy nhập câu trả lời.");
+
+        return;
+
+    }
+
+    userAnswers[index] = value;
+
+    checked[index] = true;
+
+    const correct =
+        q.answers.some(
+            a => normalize(a) === normalize(value)
+        );
+
+    if(correct) {
+
+        showFeedback(
+            index,
+            true,
+            "✓ Chính xác!"
+        );
+
+        playSound(true);
+
+    } else {
+
+        showFeedback(
+            index,
+            false,
+            "✗ Chưa đúng! Em có thể sửa và kiểm tra lại."
+        );
+
+        playSound(false);
+
+    }
+
+    updateScore();
+
+    renderGrid();
+}
+
+
+/* =====================================================
+   CHUẨN HÓA CÂU TRẢ LỜI
+===================================================== */
+
+function normalize(text) {
+
+    return String(text)
+        .toLowerCase()
+        .replace(/\s+/g,"")
+        .replace(/,/g,".")
+        .replace(/°c/g,"")
+        .replace(/độ/g,"")
+        .replace(/phút/g,"")
+        .replace(/giây/g,"")
+        .replace(/kg/g,"kg")
+        .trim();
+
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+function showFeedback(index,correct,message) {
+
+    const box =
+        document.getElementById(`feedback-${index}`);
+
+    box.className =
+        "feedback " +
+        (correct
+            ? "correct-feedback"
+            : "wrong-feedback");
+
+    box.textContent = message;
+
+}
+
+
+/* =====================================================
+   HIỆN ĐÁP ÁN
+===================================================== */
+
+function showAnswer(index) {
+
+    const q = questions[index];
+
+    const box =
+        document.getElementById(`answer-${index}`);
+
+    let answer = "";
+
+    if(q.type === "mcq") {
+
+        answer =
+            "Đáp án: " +
+            String.fromCharCode(65 + q.answer) +
+            ". " +
+            q.options[q.answer];
+
+    }
+
+    if(q.type === "tf") {
+
+        answer =
+            "Đáp án: " +
+            (q.answer ? "Đúng" : "Sai");
+
+    }
+
+    if(q.type === "short") {
+
+        answer =
+            "Đáp án: " + q.displayAnswer;
+
+    }
+
+    box.innerHTML =
+        `<b>${answer}</b><br><br>${q.explanation}`;
+
+    box.style.display = "block";
+
+}
+
+
+/* =====================================================
+   TÍNH ĐIỂM
+   Mỗi câu 0,5 điểm
+===================================================== */
+
+function isCorrect(index) {
+
+    const q = questions[index];
+
+    const answer = userAnswers[index];
+
+    if(answer === null || answer === "") {
+        return false;
+    }
+
+    if(q.type === "mcq") {
+        return answer === q.answer;
+    }
+
+    if(q.type === "tf") {
+        return answer === q.answer;
+    }
+
+    if(q.type === "short") {
+
+        return q.answers.some(
+            a => normalize(a) === normalize(answer)
+        );
+
+    }
+
+    return false;
+}
+
+
+function calculateScore() {
+
+    let correct = 0;
+
+    questions.forEach((_,index) => {
+
+        if(isCorrect(index)) {
+            correct++;
+        }
+
+    });
+
+    return correct * 0.5;
+
+}
+
+
+function updateScore() {
+
+    const score =
+        calculateScore();
+
+    document.getElementById("currentScore")
+        .textContent = score.toFixed(1);
+
+    document.getElementById("finalScore")
+        .textContent = score.toFixed(1);
+
+}
+
+
+/* =====================================================
+   BẢNG CÂU HỎI BÊN PHẢI
+===================================================== */
+
+function renderGrid() {
+
+    const grid =
+        document.getElementById("questionGrid");
+
+    grid.innerHTML = "";
+
+    questions.forEach((q,index) => {
+
+        const btn =
+            document.createElement("button");
+
+        btn.className = "q-number";
+
+        btn.textContent = index + 1;
+
+        if(userAnswers[index] !== null &&
+           userAnswers[index] !== "") {
+
+            btn.classList.add("answered");
+
+            if(isCorrect(index)) {
+                btn.classList.add("correct");
+            } else if(checked[index]) {
+                btn.classList.add("wrong");
+            }
+
+        }
+
+        btn.onclick = function() {
+
+            document
+                .getElementById(`question-${index}`)
+                .scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
+
+        };
+
+        grid.appendChild(btn);
+
+    });
+
+}
+
+
+/* =====================================================
+   NỘP KẾT QUẢ GOOGLE SHEETS
+===================================================== */
+
+async function submitResult() {
+
+    const unanswered =
+        questions.filter(
+            (_,index) =>
+                userAnswers[index] === null ||
+                userAnswers[index] === ""
+        ).length;
+
+
+    if(unanswered > 0) {
+
+        const confirmSubmit =
+            confirm(
+                `Em còn ${unanswered} câu chưa trả lời.\n\n` +
+                `Em có chắc muốn nộp bài không?`
+            );
+
+        if(!confirmSubmit) {
+            return;
+        }
+
+    } else {
+
+        const confirmSubmit =
+            confirm(
+                "Em có chắc muốn nộp bài không?"
+            );
+
+        if(!confirmSubmit) {
+            return;
+        }
+
+    }
+
+
+    const score =
+        Number(calculateScore().toFixed(1));
+
+
+    /* 
+       DỮ LIỆU GỬI SANG APPS SCRIPT
+
+       Apps Script sẽ nhận:
+       hoTen
+       lop
+       diem
+       baiKiemTra
+    */
+
+    const data = {
+
+        hoTen: studentName,
+
+        lop: studentClass,
+
+        diem: score,
+
+        baiKiemTra: TEST_NAME
+
+    };
+
+
+    const status =
+        document.getElementById("submitStatus");
+
+    status.textContent =
+        "⏳ Đang gửi kết quả...";
+
+    status.style.color = "#2563eb";
+
+
+    try {
+
+        await fetch(
+            GOOGLE_SCRIPT_URL,
+            {
+                method: "POST",
+
+                mode: "no-cors",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify(data)
+            }
+        );
+
+
+        /*
+          Vì no-cors không cho HTML đọc phản hồi
+          từ Google Apps Script, không thể đọc trực tiếp
+          success:true/false từ doPost().
+        */
+
+        status.textContent =
+            "✅ ĐÃ GỬI KẾT QUẢ!";
+
+        status.style.color = "#16a34a";
+
+        document.querySelector(".submit-btn")
+            .disabled = true;
+
+        document.querySelector(".submit-btn")
+            .style.opacity = "0.6";
+
+    } catch(error) {
+
+        console.error(error);
+
+        status.textContent =
+            "❌ Không gửi được kết quả. Hãy kiểm tra lại kết nối.";
+
+        status.style.color = "#dc2626";
+
+    }
+
+}
+
+
+/* =====================================================
+   KHỞI TẠO
+===================================================== */
+
+updateScore();
+
+</script>
+
+</body>
+</html>
